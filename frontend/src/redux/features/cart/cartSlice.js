@@ -43,10 +43,18 @@ const cartSlice = createSlice({
                     confirmButtonText: "OK!"
                 })
             }
+        },
+        /*Removes an item from cartItems whose _id matches the _id from action.payload.
+          filter: Keeps all items except the one with the matching _id.   */
+        removeFromCart: (state, action) => {
+            state.cartItems = state.cartItems.filter(item => item._id !== action.payload._id)
+        },
+        clearCart: (state) =>{
+            state.cartItems = []
         }
     }
 })
 
 //export the actions
-export const {addToCart} = cartSlice.actions;   //Exports the addToCart action for use in components.
+export const {addToCart, removeFromCart, clearCart} = cartSlice.actions;   //Exports the addToCart action for use in components.
 export default cartSlice.reducer;   //Exports the reducer to be used in the Redux store.
